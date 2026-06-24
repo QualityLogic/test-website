@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <style>
+            .form-section {
+                background-color: #FAF9F6;
+                padding: 1.5rem;
+                border-radius: 4px;
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+            .form-section h4 {
+                margin: 0 0 0.75rem 0;
+                color: #003D3A;
+            }
+            .inputs-grid label {
+                color: #222222;
+                font-weight: bold;
+            }
+            .inputs-grid input {
+                padding: 0.3rem;
+                border: 1px solid #222222;
+                border-radius: 3px;
+            }
+            .color-container {
+                display: flex;
+                gap: 2rem;
+                align-items: center;
+                justify-content: center;
+            }
+            .color-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .color-item input[type="color"] {
+                width: 60px;
+                height: 40px;
+                border: 1px solid #222222;
+                cursor: pointer;
+            }
+            .range-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+            }
+            .range-container input[type="range"] {
+                width: 80%;
+            }
+            .range-value {
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #003D3A;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="html5-form-inputs">
+            <div id="link-container">
+                <a href="../index.html">Home</a>
+            </div>
+
+            <h3>HTML5 Form Input Types</h3>
+
+            <!-- Section 1: Date/Time Picker Inputs -->
+            <div class="content">
+                <div class="form-section">
+                    <h4>Date &amp; Time Inputs</h4>
+                    <form class="inputs-grid">
+                        <label for="date-markup-input-type">Date:</label>
+                        <input type="date" id="date-markup-input-type" name="date-input"
+                            value="2025-01-15" min="2020-01-01" max="2030-12-31" />
+
+                        <label for="new-input-type-form-input-2">Datetime-local:</label>
+                        <input type="datetime-local" id="new-input-type-form-input-2" name="datetime-input"
+                            value="2025-01-15T09:30" min="2020-01-01T00:00" max="2030-12-31T23:59" />
+
+                        <label for="month-markup-input-type">Month:</label>
+                        <input type="month" id="month-markup-input-type" name="month-input"
+                            value="2025-01" />
+
+                        <label for="time-markup-input-type">Time:</label>
+                        <input type="time" id="time-markup-input-type" name="time-input"
+                            value="09:30" />
+
+                        <label for="week-markup-input-type">Week:</label>
+                        <input type="week" id="week-markup-input-type" name="week-input"
+                            value="2025-W03" />
+                    </form>
+                </div>
+            </div>
+
+            <!-- Section 2: Color Inputs -->
+            <div class="content">
+                <div class="form-section">
+                    <h4>Color Inputs</h4>
+                    <div class="color-container">
+                        <div class="color-item">
+                            <label for="color-input-1">Primary Color</label>
+                            <input type="color" id="color-input-1" name="color-1" value="#008079" />
+                        </div>
+                        <div class="color-item">
+                            <label for="color-input-2">Secondary Color</label>
+                            <input type="color" id="color-input-2" name="color-2" value="#222222" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Range Input -->
+            <div class="content">
+                <div class="form-section">
+                    <h4>Range Input</h4>
+                    <div class="range-container">
+                        <label for="range-input">Volume (1-10):</label>
+                        <input type="range" id="range-input" name="range-input"
+                            min="1" max="10" value="5" step="1" />
+                        <span class="range-value" id="range-display">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const rangeInput = document.getElementById('range-input');
+            const rangeDisplay = document.getElementById('range-display');
+            rangeInput.addEventListener('input', () => {
+                rangeDisplay.textContent = rangeInput.value;
+            });
+        </script>
+    </body>
+</html>

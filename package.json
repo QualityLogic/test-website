@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx playwright test",
+    "test:html5": "npx playwright test e2e/html5FormInputs.spec.js",
     "start": "node ./server/server.js &"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "live-server": "^1.2.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }
