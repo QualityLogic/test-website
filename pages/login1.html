@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login 1 Login | Test Portal</title>
+        <!-- Access guard: runs before the body paints. The chooser (or a role
+             switcher) sets a one-time token; a direct hit / reload has none and
+             is bounced back to the chooser. -->
+        <script>
+            (function () {
+                var ROLE = 'login1', granted = null;
+                try {
+                    granted = sessionStorage.getItem('portalAccess');
+                    sessionStorage.removeItem('portalAccess');
+                } catch (e) { /* no storage -> treat as not granted */ }
+                if (granted !== ROLE) { window.location.replace('login.html'); }
+            })();
+        </script>
+        <link rel="stylesheet" type="text/css" href="portalLogin.css">
+    </head>
+    <body class="portal-body">
+        <div id="link-container">
+            <a href="../index.html">Home</a>
+        </div>
+
+        <main class="portal-shell">
+            <div class="portal-logo portal-logo-sm" aria-label="Test Portal">
+                <span>Test</span><span>PORTAL</span>
+            </div>
+
+            <div class="portal-card">
+                <nav class="role-switcher" aria-label="Choose a different login">
+                    <a class="switch-role" id="switch-login3" data-role="login3" href="login3.html">
+                        <span class="switch-label">Login 3</span>
+                    </a>
+                    <span class="switch-role is-active" aria-current="page">
+                        <span class="switch-label">Login 1</span>
+                    </span>
+                    <a class="switch-role" id="switch-login2" data-role="login2" href="login2.html">
+                        <span class="switch-label">Login 2</span>
+                    </a>
+                </nav>
+
+                <h1 class="welcome">Welcome!</h1>
+                <p class="role-subtitle">Login 1</p>
+
+                <form class="portal-login-form" data-role="login1" novalidate>
+                    <label for="username">Email</label>
+                    <input type="email" id="username" name="username" autocomplete="username">
+
+                    <label for="password">Password</label>
+                    <div class="password-wrap">
+                        <input type="password" id="password" name="password" autocomplete="current-password">
+                        <button type="button" id="showPasswordButton" aria-label="Show password">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="login-btn">LOG IN</button>
+                    <button type="button" id="forgotPasswordButton" class="link-btn">Forgot your password?</button>
+
+                    <div class="or-divider"><span>OR</span></div>
+
+                    <button type="button" class="sso-btn" id="sso-button-google" data-provider="Google">
+                        <svg class="sso-icon" viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+                            <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.4 17.7 9.5 24 9.5z"/>
+                            <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.6-4.9 7.3l7.6 5.9C43.9 38 46.5 31.8 46.5 24.5z"/>
+                            <path fill="#FBBC05" d="M10.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.9-6.2C.9 16.5 0 20.1 0 24s.9 7.5 2.6 10.6l7.9-6.2z"/>
+                            <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-3.9-13.5-9.4l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/>
+                        </svg>
+                        Sign in with Google
+                    </button>
+                </form>
+
+                <div class="login-status" id="login-status" role="status" aria-live="polite"></div>
+            </div>
+        </main>
+
+        <footer class="portal-footer">
+            <a id="privacy" target="_blank" href="#">Privacy</a>
+        </footer>
+
+        <script src="portalLogin.js" defer></script>
+    </body>
+</html>
