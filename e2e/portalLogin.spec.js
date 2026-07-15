@@ -4,36 +4,36 @@ const CHOOSER_URL = '/pages/login.html';
 
 const PORTALS = [
   {
-    id: 'teacher-admin',
-    file: 'loginTeacher.html',
-    href: 'loginTeacher.html',
+    id: 'login1',
+    file: 'login1.html',
+    href: 'login1.html',
     label: 'Login 1',
     subtitle: 'Login 1',
-    title: 'Login 1 Login | My Test Portal',
+    title: 'Login 1 Login | Test Portal',
     usernameLabel: 'Email',
     usernameType: 'email',
     hasSchoolId: false,
     hasQr: false,
   },
   {
-    id: 'parent',
-    file: 'loginParent.html',
-    href: 'loginParent.html',
-    label: 'Parents and caregivers',
-    subtitle: 'Parents and caregivers',
-    title: 'Login 3 Login | My Test Portal',
+    id: 'login3',
+    file: 'login3.html',
+    href: 'login3.html',
+    label: 'Login 3',
+    subtitle: 'Login 3',
+    title: 'Login 3 Login | Test Portal',
     usernameLabel: 'Email',
     usernameType: 'email',
     hasSchoolId: false,
     hasQr: false,
   },
   {
-    id: 'students',
-    file: 'loginStudent.html',
-    href: 'loginStudent.html',
-    label: 'Students',
-    subtitle: 'Students',
-    title: 'Login 2 Login | My Test Portal',
+    id: 'login2s',
+    file: 'login2.html',
+    href: 'login2.html',
+    label: 'Login 2',
+    subtitle: 'Login 2',
+    title: 'Login 2 Login | Test Portal',
     usernameLabel: 'Username',
     usernameType: 'text',
     hasSchoolId: true,
@@ -48,8 +48,8 @@ test.describe('Portal Login chooser page', () => {
   });
 
   test('loads with correct heading and title', async ({ page }) => {
-    await expect(page).toHaveTitle('Login | My Test Portal');
-    await expect(page.locator('.zb-headline')).toHaveText('Please select your user type:');
+    await expect(page).toHaveTitle('Login | Test Portal');
+    await expect(page.locator('.portal-headline')).toHaveText('Please select your login:');
   });
 
   test('shows exactly three role-selection buttons', async ({ page }) => {
@@ -74,13 +74,12 @@ test.describe('Portal Login chooser page', () => {
 
 test.describe('Direct navigation to a portal fails', () => {
   // The portals are only reachable by clicking a button. Navigating straight
-  // to a portal URL (or reloading one) bounces back to the chooser, mirroring
-  // the live site where a direct hit on /login/user lands on /login.
+  // to a portal URL (or reloading one) bounces back to the chooser.
   for (const portal of PORTALS) {
     test(`direct navigation to ${portal.file} redirects to the chooser`, async ({ page }) => {
       await page.goto(`/pages/${portal.file}`, { waitUntil: 'networkidle' });
       await expect(page).toHaveURL(new RegExp(`${CHOOSER_URL}$`));
-      await expect(page.locator('.zb-headline')).toHaveText('Please select your user type:');
+      await expect(page.locator('.portal-headline')).toHaveText('Please select your login:');
       await expect(page.locator('.portal-login-form')).toHaveCount(0);
     });
   }
@@ -116,8 +115,6 @@ test.describe('Clicking a role button succeeds', () => {
       test('shows the three SSO buttons', async ({ page }) => {
         await expect(page.locator('.sso-btn')).toHaveCount(3);
         await expect(page.locator('#sso-button-google')).toContainText('Sign in with Google');
-        await expect(page.locator('#sso-button-clever')).toContainText('Sign in with Clever');
-        await expect(page.locator('#sso-button-classlink')).toContainText('Sign in with Class Link');
       });
 
       test(`${portal.hasSchoolId ? 'has' : 'does not have'} a School ID field`, async ({ page }) => {
@@ -131,7 +128,7 @@ test.describe('Clicking a role button succeeds', () => {
       test('reloading the portal bounces back to the chooser', async ({ page }) => {
         await page.reload({ waitUntil: 'networkidle' });
         await expect(page).toHaveURL(new RegExp(`${CHOOSER_URL}$`));
-        await expect(page.locator('.zb-headline')).toHaveText('Please select your user type:');
+        await expect(page.locator('.portal-headline')).toHaveText('Please select your login:');
       });
     });
   }
@@ -141,7 +138,7 @@ test.describe('Portal interactions', () => {
 
   test('show/hide password toggle reveals the password', async ({ page }) => {
     await page.goto(CHOOSER_URL);
-    await page.click('#teacher-admin');
+    await page.click('#login1');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('#password')).toHaveAttribute('type', 'password');
     await page.click('#showPasswordButton');
@@ -152,17 +149,17 @@ test.describe('Portal interactions', () => {
 
   test('submitting the form shows a local status message', async ({ page }) => {
     await page.goto(CHOOSER_URL);
-    await page.click('#parent');
+    await page.click('#login3');
     await page.waitForLoadState('networkidle');
     await page.fill('#username', 'caregiver@example.com');
     await page.fill('#password', 'secret');
     await page.click('.login-btn');
-    await expect(page.locator('#login-status')).toContainText('parent');
+    await expect(page.locator('#login-status')).toContainText('login3');
   });
 
   test('empty submit prompts for the username', async ({ page }) => {
     await page.goto(CHOOSER_URL);
-    await page.click('#teacher-admin');
+    await page.click('#login1');
     await page.waitForLoadState('networkidle');
     await page.click('.login-btn');
     await expect(page.locator('#login-status')).toContainText('email');
@@ -170,19 +167,19 @@ test.describe('Portal interactions', () => {
 
   test('role switcher navigates between portals (in-app click works)', async ({ page }) => {
     await page.goto(CHOOSER_URL);
-    await page.click('#teacher-admin');
+    await page.click('#login1');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('.role-subtitle')).toHaveText('Login 1');
 
-    await page.click('#switch-student');
+    await page.click('#switch-login2');
     await page.waitForLoadState('networkidle');
-    await expect(page).toHaveURL(/\/pages\/loginStudent\.html$/);
-    await expect(page.locator('.role-subtitle')).toHaveText('Students');
+    await expect(page).toHaveURL(/\/pages\/login2\.html$/);
+    await expect(page.locator('.role-subtitle')).toHaveText('Login 2');
 
-    await page.click('#switch-parent');
+    await page.click('#switch-login3');
     await page.waitForLoadState('networkidle');
-    await expect(page).toHaveURL(/\/pages\/loginParent\.html$/);
-    await expect(page.locator('.role-subtitle')).toHaveText('Parents and caregivers');
+    await expect(page).toHaveURL(/\/pages\/login3\.html$/);
+    await expect(page.locator('.role-subtitle')).toHaveText('Login 3');
   });
 });
 
@@ -197,6 +194,6 @@ test.describe('index page link to Portal Login', () => {
   test('link navigates to the chooser page', async ({ page }) => {
     await page.goto('/');
     await page.click('a[href="./pages/login.html"]');
-    await expect(page.locator('.zb-headline')).toHaveText('Please select your user type:');
+    await expect(page.locator('.portal-headline')).toHaveText('Please select your login:');
   });
 });

@@ -1,6 +1,6 @@
-/* Shared behavior for the My Test Portal login replica.
+/* Shared behavior for the Test Portal login.
  *
- * Navigation model (mirrors the real Angular site):
+ * Navigation model:
  *   - The chooser (login.html) and the role-switcher links set a one-time
  *     access token in sessionStorage, THEN let the browser follow the link.
  *   - Each portal page runs an inline guard in its <head> that reads and
@@ -8,13 +8,12 @@
  *     the page renders; otherwise it redirects back to the chooser.
  *
  * Result: clicking a button reaches the portal, but navigating to a portal
- * URL directly (or reloading one) bounces back to the chooser -- exactly
- * like the live site, where a direct hit on /login/user lands on /login.
+ * URL directly (or reloading one) bounces back to the chooser.
  */
 (function () {
     'use strict';
 
-    var ACCESS_KEY = 'zbPortalAccess';
+    var ACCESS_KEY = 'portalAccess';
 
     // Any element with [data-role] grants access to that role's portal when
     // clicked, then navigation proceeds normally via the anchor's href.
@@ -53,10 +52,10 @@
         if (form) {
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
-                var role = form.getAttribute('data-role') || 'user';
-                var user = document.getElementById('username');
-                if (user && !user.value.trim()) {
-                    showStatus('Please enter your ' + (user.type === 'email' ? 'email' : 'username') + '.');
+                var role = form.getAttribute('data-role') || 'login';
+                var field = document.getElementById('username');
+                if (field && !field.value.trim()) {
+                    showStatus('Please enter your ' + (field.type === 'email' ? 'email' : 'username') + '.');
                     return;
                 }
                 showStatus('Login submitted for ' + role + ' portal.');

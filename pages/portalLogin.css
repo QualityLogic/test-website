@@ -1,33 +1,26 @@
-/* Shared styles for the My Test Portal login replica
-   (chooser + teacher / parent / student portals) */
+/* Shared styles for the Test Portal login replica
+   (chooser + login1 / login3 / login2 portals) */
 
 :root {
-    --zb-primary: #E02619;      /* red -- LOG IN, active role, Test logo */
-    --zb-primary-dark: #b70000;
-    --zb-ink: #1f2124;
-    --zb-muted: #5a5f66;
-    --zb-tertiary: #006979;     /* teal accent */
+    --portal-primary: #00AFFF;      /* red -- LOG IN, active role, Test logo */
+    --portal-primary-dark: #0000FF;
+    --portal-ink: #1f2124;
+    --portal-muted: #5a5f66;
+    --portal-tertiary: #006979;     /* teal accent */
 }
 
 * { box-sizing: border-box; }
 
 html, body { height: 100%; }
 
-body.zb-body {
+body.portal-body {
     margin: 0;
     font-family: "museo-sans", "Segoe UI", Verdana, Geneva, Tahoma, sans-serif;
-    color: var(--zb-ink);
+    color: var(--portal-ink);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* teal at top fading through white into orange at the bottom */
-    background: linear-gradient(180deg,
-        #a6e0d8 0%,
-        #c9ece5 16%,
-        #f4f2ec 44%,
-        #f8c680 74%,
-        #f0922f 100%) no-repeat;
-    background-attachment: fixed;
+    background: #FAF9F6;
 }
 
 /* Home link (repo convention) kept discreet in the corner */
@@ -40,10 +33,10 @@ body.zb-body {
 }
 #link-container a {
     background: rgba(255, 255, 255, 0.85);
-    color: var(--zb-tertiary);
+    color: var(--portal-tertiary);
     padding: 0.3em 0.7em;
     border-radius: 4px;
-    border: 2px solid var(--zb-ink);
+    border: 2px solid var(--portal-ink);
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 700;
@@ -51,41 +44,22 @@ body.zb-body {
 #link-container a:hover { background: lightyellow; color: #003D3A; }
 
 /* --- Wordmark logo --- */
-.zb-logo {
+.portal-logo {
     display: flex;
     align-items: baseline;
     justify-content: center;
     gap: 0.15em;
     user-select: none;
     line-height: 1;
-}
-.zb-logo .lg-my {
-    font-size: 1.6rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--zb-ink);
-}
-.zb-logo .lg-zb {
-    font-size: 2.6rem;
-    font-weight: 800;
-    font-style: italic;
-    color: var(--zb-primary);
-    letter-spacing: -0.04em;
-    transform: skewX(-6deg);
-}
-.zb-logo .lg-portal {
     font-size: 2.4rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--zb-ink);
+    font-weight: 700;
+    color: var(--portal-ink);
 }
-.zb-logo.zb-logo-lg { margin-top: 2.5rem; }
-.zb-logo.zb-logo-sm .lg-my { font-size: 1.1rem; }
-.zb-logo.zb-logo-sm .lg-zb { font-size: 1.8rem; }
-.zb-logo.zb-logo-sm .lg-portal { font-size: 1.7rem; }
+.portal-logo.portal-logo-lg { margin-top: 2.5rem; }
+.portal-logo.portal-logo-sm { font-size: 1.7rem; }
 
 /* ============ CHOOSER PAGE ============ */
-.zb-choose {
+.portal-choose {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -95,7 +69,7 @@ body.zb-body {
     padding: 1rem;
     width: 100%;
 }
-.zb-headline {
+.portal-headline {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 2rem 0 0;
@@ -115,12 +89,12 @@ body.zb-body {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    color: var(--zb-tertiary);
+    color: var(--portal-tertiary);
     text-decoration: none;
     width: 160px;
     cursor: pointer;
 }
-.choose-role-link:hover .role-icon { border-color: var(--zb-primary); color: var(--zb-primary); }
+.choose-role-link:hover .role-icon { border-color: var(--portal-primary); color: var(--portal-primary); }
 .role-icon {
     display: flex;
     justify-content: center;
@@ -141,7 +115,7 @@ body.zb-body {
 }
 
 /* ============ PORTAL PAGES ============ */
-.zb-portal {
+.portal-shell {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -149,7 +123,7 @@ body.zb-body {
     padding: 1rem;
     width: 100%;
 }
-.zb-card {
+.portal-card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.12);
@@ -158,7 +132,7 @@ body.zb-body {
     margin: 1.5rem 0;
     padding: 1.5rem 2rem 2.5rem;
 }
-.zb-card.zb-card-wide { max-width: 880px; }
+.portal-card.portal-card-wide { max-width: 880px; }
 
 /* role switcher row at the top of the card */
 .role-switcher {
@@ -190,8 +164,8 @@ body.zb-body {
     color: #000;
 }
 .role-switcher .switch-icon svg { width: 55%; height: 55%; }
-.role-switcher .switch-role.is-active .switch-icon { border-color: var(--zb-primary); color: var(--zb-primary); }
-.role-switcher .switch-role:not(.is-active):hover .switch-icon { border-color: var(--zb-primary); color: var(--zb-primary); }
+.role-switcher .switch-role.is-active .switch-icon { border-color: var(--portal-primary); color: var(--portal-primary); }
+.role-switcher .switch-role:not(.is-active):hover .switch-icon { border-color: var(--portal-primary); color: var(--portal-primary); }
 .role-switcher .switch-label { font-size: 0.85rem; font-weight: 600; line-height: 1.2; text-align: center; }
 .role-switcher .switch-role.is-active .switch-label { visibility: hidden; }
 
@@ -204,11 +178,11 @@ body.zb-body {
 .role-subtitle {
     text-align: center;
     font-size: 1.15rem;
-    color: var(--zb-muted);
+    color: var(--portal-muted);
     margin: 0 0 1.5rem;
 }
 
-/* 2-column layout used by the student portal */
+/* 2-column layout used by the login2 portal */
 .portal-columns { display: flex; flex-wrap: wrap; gap: 2rem; }
 .portal-columns .col-form { flex: 1 1 320px; }
 .portal-columns .col-qr {
@@ -249,7 +223,7 @@ body.zb-body {
 }
 .login-btn {
     margin-top: 1.5rem;
-    background: var(--zb-primary);
+    background: var(--portal-primary);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -259,18 +233,18 @@ body.zb-body {
     letter-spacing: 0.03em;
     cursor: pointer;
 }
-.login-btn:hover { background: var(--zb-primary-dark); }
+.login-btn:hover { background: var(--portal-primary-dark); }
 .link-btn {
     background: none;
     border: none;
-    color: var(--zb-primary-dark);
+    color: var(--portal-primary-dark);
     font-weight: 700;
     text-decoration: underline;
     cursor: pointer;
     margin: 1rem auto 0;
     font-size: 1rem;
 }
-.link-btn:hover { color: var(--zb-primary); }
+.link-btn:hover { color: var(--portal-primary); }
 
 .or-divider {
     display: flex;
@@ -301,14 +275,12 @@ body.zb-body {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    color: var(--zb-ink);
+    color: var(--portal-ink);
 }
 .sso-btn:hover { box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); }
 .sso-btn .sso-icon { flex: 0 0 auto; }
-#sso-button-clever { color: #436CF0; }
-#sso-button-classlink { color: #2AA4E0; }
 
-/* --- QR section (student) --- */
+/* --- QR section (login2) --- */
 .qr-visual { display: flex; align-items: flex-start; gap: 0.5rem; }
 .qr-scan-arrow { width: 70px; height: 70px; }
 .qr-code { width: 150px; height: 150px; }
@@ -325,7 +297,7 @@ body.zb-body {
     cursor: pointer;
 }
 .qr-help {
-    color: var(--zb-primary-dark);
+    color: var(--portal-primary-dark);
     font-weight: 700;
     text-decoration: underline;
 }
@@ -336,11 +308,11 @@ body.zb-body {
     min-height: 1.2rem;
     text-align: center;
     font-weight: 600;
-    color: var(--zb-tertiary);
+    color: var(--portal-tertiary);
 }
 
 /* ============ FOOTER ============ */
-.zb-footer {
+.portal-footer {
     color: #1f3343;
     font-size: 0.8rem;
     font-weight: 600;
@@ -350,6 +322,6 @@ body.zb-body {
     align-items: center;
     gap: 0.5rem 1.5rem;
 }
-.zb-footer a { color: #1f3343; text-decoration: underline; }
-.zb-footer a:hover { color: #fff; }
-.zb-footer .copyright { margin-left: auto; }
+.portal-footer a { color: #1f3343; text-decoration: underline; }
+.portal-footer a:hover { color: var(--portal-tertiary); }
+.portal-footer .copyright { margin-left: auto; }
