@@ -7,8 +7,8 @@ const PORTALS = [
     id: 'teacher-admin',
     file: 'loginTeacher.html',
     href: 'loginTeacher.html',
-    label: 'Teachers and administrators',
-    subtitle: 'Teachers and administrators',
+    label: 'Login 1',
+    subtitle: 'Login 1',
     title: 'Teacher and Administrator Login | My Test Portal',
     usernameLabel: 'Email',
     usernameType: 'email',
@@ -21,7 +21,7 @@ const PORTALS = [
     href: 'loginParent.html',
     label: 'Parents and caregivers',
     subtitle: 'Parents and caregivers',
-    title: 'Parent and Caregiver Login | My Test Portal',
+    title: 'Login 3 Login | My Test Portal',
     usernameLabel: 'Email',
     usernameType: 'email',
     hasSchoolId: false,
@@ -33,7 +33,7 @@ const PORTALS = [
     href: 'loginStudent.html',
     label: 'Students',
     subtitle: 'Students',
-    title: 'Student Login | My Test Portal',
+    title: 'Login 2 Login | My Test Portal',
     usernameLabel: 'Username',
     usernameType: 'text',
     hasSchoolId: true,
@@ -172,7 +172,7 @@ test.describe('Portal interactions', () => {
     await page.goto(CHOOSER_URL);
     await page.click('#teacher-admin');
     await page.waitForLoadState('networkidle');
-    await expect(page.locator('.role-subtitle')).toHaveText('Teachers and administrators');
+    await expect(page.locator('.role-subtitle')).toHaveText('Login 1');
 
     await page.click('#switch-student');
     await page.waitForLoadState('networkidle');
