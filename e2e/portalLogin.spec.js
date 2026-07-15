@@ -9,7 +9,7 @@ const PORTALS = [
     href: 'loginTeacher.html',
     label: 'Login 1',
     subtitle: 'Login 1',
-    title: 'Teacher and Administrator Login | My Test Portal',
+    title: 'Login 1 Login | My Test Portal',
     usernameLabel: 'Email',
     usernameType: 'email',
     hasSchoolId: false,
